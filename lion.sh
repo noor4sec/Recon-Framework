@@ -17,11 +17,11 @@ if [ ! -d "$target/recon" ]; then
 fi
 
 if [ ! -d "$target/params-vuln" ]; then
-          mkdir $target/params_vuln
+          mkdir $target/params-vuln
 fi
 
 if [ ! -d "$target/subs-vuln" ]; then
-          mkdir $target/subs_vuln
+          mkdir $target/subs-vuln
 fi
 
 if [ ! -d "$target/recon/false-positive" ]; then
@@ -29,7 +29,7 @@ if [ ! -d "$target/recon/false-positive" ]; then
 fi
 
 if [ ! -d "$target/subs-vuln/false-positive" ]; then
-          mkdir $target/subs_vuln/false_positive
+          mkdir $target/subs_vuln/false-positive
 fi
 
 if [ ! -d "$target/params-vuln/false-positive" ]; then
@@ -46,8 +46,8 @@ echo
 \___ \| __/ _` | '__| __|  \ \ /\ / /| | __| '_ \  | |_) / _ \/ __/ _ \| '_ \ 
  ___) | || (_| | |  | |_    \ V  V / | | |_| | | | |  _ <  __/ (_| (_) | | | |
 |____/ \__\__,_|_|   \__|    \_/\_/  |_|\__|_| |_| |_| \_\___|\___\___/|_| |_|
-Finding SubDomains,Parameters,Screenshoting,Servers,OS,Services,WAFs,OpenPorts,Headers
-BreachedData,WhoIs,                                                                             
+Finding SubDomains,Parameters,Screenshoting,OperatingSystem,Servers,ServicesRunning,WAFs,OpenPorts,Headers
+BreachedData,WhoIs etc.,                                                                             
 "
 #---------------------------------------------------------------------------------
 #-----------------------------Finding SubDomains----------------------------------
@@ -76,6 +76,10 @@ echo "[+]Enumurating SubDomains Using Sublist3r..."
 python3 /opt/Sublist3r/sublist3r.py -d $target -o $1/recon/sublist3r.txt
 cat $target/recon/sublist3r.txt | grep $target >> $target/recon/final.txt
 rm $1/recon/sublist3r.txt 
+
+echo "[+]BruteForcing With ffuf..."
+
+echo "[+]BruteForcing With projectsiscovery"
 
 echo "[+]Filtering Repeated Domains........." 
 cat $target/recon/final.txt | sort -u | tee $target/recon/final-subs.txt 
