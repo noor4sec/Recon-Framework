@@ -39,6 +39,16 @@ fi
 if [ ! -d "$target/recon/EyeWitness" ]; then
       mkdir $target/recon/EyeWitness
 fi
+
+echo 
+" ____  _             _    __        ___ _   _       ____                      
+/ ___|| |_ __ _ _ __| |_  \ \      / (_) |_| |__   |  _ \ ___  ___ ___  _ __  
+\___ \| __/ _` | '__| __|  \ \ /\ / /| | __| '_ \  | |_) / _ \/ __/ _ \| '_ \ 
+ ___) | || (_| | |  | |_    \ V  V / | | |_| | | | |  _ <  __/ (_| (_) | | | |
+|____/ \__\__,_|_|   \__|    \_/\_/  |_|\__|_| |_| |_| \_\___|\___\___/|_| |_|
+Finding SubDomains,Parameters,Screenshoting,Servers,OS,Services,WAFs,OpenPorts,Headers
+BreachedData,WhoIs,                                                                             
+"
 #---------------------------------------------------------------------------------
 #-----------------------------Finding SubDomains----------------------------------
 #----------------------------------------------------------------------------------
@@ -118,7 +128,7 @@ echo
 |  _|| |_| |/ / / /| | | | | (_| | |  __/ (_| | | | (_| | | | | | \__ \
 |_|   \__,_/___/___|_|_| |_|\__, | |_|   \__,_|_|  \__,_|_| |_| |_|___/
                             |___/                                      
-Testing For HTML,XSS,Template,Command,CRLF,SQL Injections And LFI, OpenRedirects etc.,
+Testing For HTML,XSS,Template,Command,CRLF,SQL Injections And LFI,SSRF,OpenRedirects etc.,
 "
 #--------------------------------------------------------------------------------------------------
 #-------------------------------Fuzzing For HTML Injection-----------------------------------------
