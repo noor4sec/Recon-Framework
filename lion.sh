@@ -40,15 +40,7 @@ if [ ! -d "$target/recon/EyeWitness" ]; then
       mkdir $target/recon/EyeWitness
 fi
 
-echo 
-" ____  _             _    __        ___ _   _       ____                      
-/ ___|| |_ __ _ _ __| |_  \ \      / (_) |_| |__   |  _ \ ___  ___ ___  _ __  
-\___ \| __/ _` | '__| __|  \ \ /\ / /| | __| '_ \  | |_) / _ \/ __/ _ \| '_ \ 
- ___) | || (_| | |  | |_    \ V  V / | | |_| | | | |  _ <  __/ (_| (_) | | | |
-|____/ \__\__,_|_|   \__|    \_/\_/  |_|\__|_| |_| |_| \_\___|\___\___/|_| |_|"
 
-echo "Finding SubDomains,Parameters,Screenshoting,OperatingSystem,Servers,ServicesRunning,WAFs,OpenPorts,Headers
-BreachedData,WhoIs etc.,"
 
 #---------------------------------------------------------------------------------
 #-----------------------------Finding SubDomains----------------------------------
