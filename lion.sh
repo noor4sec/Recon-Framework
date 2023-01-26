@@ -47,8 +47,7 @@ echo
  ___) | || (_| | |  | |_    \ V  V / | | |_| | | | |  _ <  __/ (_| (_) | | | |
 |____/ \__\__,_|_|   \__|    \_/\_/  |_|\__|_| |_| |_| \_\___|\___\___/|_| |_|
 Finding SubDomains,Parameters,Screenshoting,OperatingSystem,Servers,ServicesRunning,WAFs,OpenPorts,Headers
-BreachedData,WhoIs etc.,                                                                             
-"
+BreachedData,WhoIs etc.,"
 
 #---------------------------------------------------------------------------------
 #-----------------------------Finding SubDomains----------------------------------
