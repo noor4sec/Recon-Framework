@@ -49,6 +49,7 @@ echo
 Finding SubDomains,Parameters,Screenshoting,OperatingSystem,Servers,ServicesRunning,WAFs,OpenPorts,Headers
 BreachedData,WhoIs etc.,                                                                             
 "
+
 #---------------------------------------------------------------------------------
 #-----------------------------Finding SubDomains----------------------------------
 #----------------------------------------------------------------------------------
