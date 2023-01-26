@@ -109,14 +109,23 @@ echo "[+]Filtering Dups..."
 cat $1/recon/urls.txt | sort -u | tee $1/recon/final-params.txt 
 rm $target/recon/urls.txt
 
-echo "[+]Total Unique Params Found...." 
+echo "[+]Total Unique Params Found..." 
 cat $target/recon/final-params.txt | wc -l
 
 #--------------------------------------------------------------------------------------------------
-#-------------------------------Checking For HTMLi && RXSS-----------------------------------------
+#-------------------------------Fuzzing For HTML Injection-----------------------------------------
 #--------------------------------------------------------------------------------------------------
-echo "[+]Fuzzing For HTML Injection...." 
+echo "[+]Fuzzing For HTML Injection..." 
 cat $target/recon/final-params.txt | qsreplace '"><u>hyper</u>' | tee $target/recon/temp.txt && cat $target/recon/temp.txt | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "><u>hyper</u>" && echo "$host "; done > $target/params-vuln/htmli.txt
-
+#--------------------------------------------------------------------------------------------------
+#-------------------------------Fuzzing For Open Redirects-----------------------------------------
+#--------------------------------------------------------------------------------------------------
+echo "[+]Fuzzing For Openredirects..." 
+cat $target/recon/final-params.txt | qsreplace 'https://evil.com' | while read host do ; do curl -s -L $host -I | grep "https://evil.com" && echo "$host" ; done >> $target/params-vuln/open-redirects.txt
+#--------------------------------------------------------------------------------------------------
+#-------------------------------Checking For SQL Injection-----------------------------------------
+#--------------------------------------------------------------------------------------------------
+echo "[+]Testing For SQL Injection...." 
+cat $target/recon/final-params.txt | python3 /opt/Sqlmap/sqlmap.py --level 2 --risk 2
 
 
