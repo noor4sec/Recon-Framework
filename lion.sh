@@ -29,7 +29,7 @@ if [ ! -d "$target/recon/false-positive" ]; then
 fi
 
 if [ ! -d "$target/subs-vuln/false-positive" ]; then
-          mkdir $target/subs_vuln/false-positive
+          mkdir $target/subs-vuln/false-positive
 fi
 
 if [ ! -d "$target/params-vuln/false-positive" ]; then
@@ -142,6 +142,35 @@ cat $target/recon/final-params.txt | qsreplace 'https://evil.com' | while read h
 #--------------------------------------------------------------------------------------------------
 echo "[+]Testing For SQL Injection...." 
 cat $target/recon/final-params.txt | python3 /opt/Sqlmap/sqlmap.py --level 2 --risk 2
+#--------------------------------------------------------------------------------------------------
+#-------------------------------Checking For Command Injection-----------------------------------------
+#--------------------------------------------------------------------------------------------------
+#echo "[+]Testing For Command Injection...." 
+#python3 /opt/commix/commix.py -m $url/recon/final_params.txt --batch 
+#--------------------------------------------------------------------------------------------------
+#-------------------------------Checking For CRLF Injection-----------------------------------------
+#--------------------------------------------------------------------------------------------------
+echo "[+]Testing For CRLF Injection...." 
+crlfuzz -l $url/recon/final_params.txt -o $url/crlf_vuln.txt -s 
+#--------------------------------------------------------------------------------------------------
+#-----------------------------------Checking For SSRF----------------------------------------------
+#--------------------------------------------------------------------------------------------------
+echo "[+]Testing For External SSRF.........." 
+cat $url/recon/final_params.txt | qsreplace "https://noor.requestcatcher.com/test" | tee $url/recon/ssrftest.txt && cat $url/recon/ssrftest.txt | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "request caught" && echo "$host \033[0;31mVulnearble\n"; done >> $url/eSSRF.txt
+rm $url/recon/ssrftest.txt
+#--------------------------------------------------------------------------------------------------
+#-------------------------------Checking For XXE Injection----------------------------------------
+#--------------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------------
+#-------------------------------Checking For Local File Inclusion----------------------------------------
+#--------------------------------------------------------------------------------------------------
+echo "[+]Scanning For Local File Inclusion...."
+cat $url/recon/final_params.txt | qsreplace FUZZ | while read host ; do ffuf -u $host -v -mr "root:x" -w payloads/lfi-small.txt ; done > $1/lfi.txt
+#--------------------------------------------------------------------------------------------------
+#-------------------------Checking For Server Side Template Injection-----------------------------
+#--------------------------------------------------------------------------------------------------
+
 echo 
 " _____              _               ____                        _           
 |  ___|   _ _______(_)_ __   __ _  |  _ \  ___  _ __ ___   __ _(_)_ __  ___ 
@@ -152,11 +181,20 @@ echo
 Fuzzing For SubDomainTakeOvers,BrokenLinks,ClickJacking,CRLF Injection,                             
 "
 #--------------------------------------------------------------------------------------------------
+#-------------------------------Checking For SubDomain TakeOver------------------------------------
+#--------------------------------------------------------------------------------------------------
+echo "[+]Testing For SubTakeOver" 
+subzy --targets  $url/recon/final_subs.txt  --hide_fails >> $url/sub_take_over.txt
+#--------------------------------------------------------------------------------------------------
 #-------------------------------Fuzzing Domains With Nuclei-----------------------------------------
 #--------------------------------------------------------------------------------------------------
 echo "[+]Fuzzing Domains With Nuclei..."
 cat $url/recon/live_subs.txt | nuclei -t /root/nuclei-templates/ -s critical,high,medium,low >> $1/nuclei.txt
-
+#--------------------------------------------------------------------------------------------------
+#-------------------------------------Full Scan With Nikto----------------------------------------
+#--------------------------------------------------------------------------------------------------
+#echo "[+] Full Scan With Nikto...." 
+#nikto -h $url/recon/live_subs.txt > $url/nikto.txt
 
 
 
