@@ -30,8 +30,16 @@ chmod 777 lion.sh
 
 <h2> In-Depth Explanation <h2>
 <h3> Fuzzing Parameters </h3>
-- Open Redirects <a href="https://github.com/ffuf/ffuf">ffuf</a>
-- External SSRF <a >
+
+Open Redirects <a href="https://github.com/ffuf/ffuf">ffuf</a>
+External SSRF <a href="https://noor.requestcatcher.com/">Request Caught</a>
+Local File Inclusion <a href="https://github.com/ffuf/ffuf">ffuf</a>
+  HTML Injection <a href="https://github.com/ffuf/ffuf">ffuf</a>
+  XSS @ Java Script Injection <a href="https://github.com/hahwul/dalfox">Dalfox</a>
+  Command Injection 
+  SQL Injection 
+  CRLF Injection 
+  
 <h2> Mind Map </h2>
 <img src="https://user-images.githubusercontent.com/85073575/224542224-a20ae3a7-e86f-4d78-b7de-e649a0abde88.png">
 <h2> Support </h2>
